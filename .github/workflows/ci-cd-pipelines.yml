@@ -10,7 +10,7 @@ jobs:
     runs-on: m2-tag  # Must be a Windows self-hosted runner
     defaults:
       run:
-        shell: pwsh
+        shell: powershell
 
     steps:
     - name: 📥 Checkout code
