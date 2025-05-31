@@ -7,11 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # or use 'ubuntu-latest' for GitHub-hosted runner
-
-    env:
-      DOTNET_ROOT: ${{ runner.temp }}/dotnet
-      PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
+    runs-on: m1-tag
 
     steps:
     - name: 📦 Checkout code
@@ -19,25 +15,31 @@ jobs:
 
     - name: 🔧 Install .NET SDK 8.0 locally (no root)
       run: |
-        mkdir -p "$DOTNET_ROOT"
+        mkdir -p "${{ runner.temp }}/dotnet"
         curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
         chmod +x dotnet-install.sh
-        ./dotnet-install.sh --version 8.0.100 --install-dir "$DOTNET_ROOT"
+        ./dotnet-install.sh --version 8.0.100 --install-dir "${{ runner.temp }}/dotnet"
+      env:
+        DOTNET_ROOT: ${{ runner.temp }}/dotnet
+        PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
     - name: 📥 Restore dependencies
       run: dotnet restore
+      env:
+        DOTNET_ROOT: ${{ runner.temp }}/dotnet
+        PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
     - name: 🛠️ Build the project
       run: dotnet build --configuration Release
+      env:
+        DOTNET_ROOT: ${{ runner.temp }}/dotnet
+        PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
     - name: 🚀 Publish the app to ./publish folder
       run: dotnet publish -c Release -o ./publish
+      env:
+        DOTNET_ROOT: ${{ runner.temp }}/dotnet
+        PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
     - name: 📂 List published files
       run: ls -R ./publish
-
-    - name: 📤 Upload published output as GitHub artifact (optional)
-      uses: actions/upload-artifact@v4
-      with:
-        name: aspnetcore-published
-        path: ./publish
