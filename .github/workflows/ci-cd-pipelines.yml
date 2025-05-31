@@ -1,19 +1,18 @@
-name: Build ASP.NET Core on Linux
+name: Build ASP.NET Core App
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: m1-tag
 
     steps:
-    - name: 📦 Checkout code
+    - name: 📦 Checkout repository
       uses: actions/checkout@v4
 
-    - name: 🔧 Install .NET SDK 8.0 locally (no root)
+    - name: 🔧 Install .NET SDK locally (if not globally installed)
       run: |
         mkdir -p "${{ runner.temp }}/dotnet"
         curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
@@ -23,7 +22,7 @@ jobs:
         DOTNET_ROOT: ${{ runner.temp }}/dotnet
         PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
-    - name: 📥 Restore dependencies
+    - name: 🛠️ Restore dependencies
       run: dotnet restore
       env:
         DOTNET_ROOT: ${{ runner.temp }}/dotnet
@@ -35,11 +34,11 @@ jobs:
         DOTNET_ROOT: ${{ runner.temp }}/dotnet
         PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
-    - name: 🚀 Publish the app to ./publish folder
-      run: dotnet publish -c Release -o ./publish
+    - name: 🚀 Publish the app to ./_work/publish folder
+      run: dotnet publish -c Release -o ${{ github.workspace }}/_work/publish
       env:
         DOTNET_ROOT: ${{ runner.temp }}/dotnet
         PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
-    - name: 📂 List published files
-      run: ls -R ./publish
+    - name: 📂 List contents of published folder
+      run: ls -R ${{ github.workspace }}/_work/publish
