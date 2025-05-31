@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: mahmudul-linux-tag
+    runs-on: m1-tag
 
     steps:
     - name: 🧾 Checkout code
