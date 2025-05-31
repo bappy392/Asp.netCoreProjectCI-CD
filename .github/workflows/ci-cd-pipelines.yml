@@ -1,4 +1,4 @@
-name: Build and Publish ASP.NET Core App
+name: Build ASP.NET Core on Linux
 
 on:
   push:
@@ -7,25 +7,37 @@ on:
 
 jobs:
   build:
-    runs-on: m1-tag
+    runs-on: m1-tag  # or use 'ubuntu-latest' for GitHub-hosted runner
+
+    env:
+      DOTNET_ROOT: ${{ runner.temp }}/dotnet
+      PATH: ${{ runner.temp }}/dotnet:${{ runner.temp }}/dotnet/tools:${{ env.PATH }}
 
     steps:
-    - name: 🧾 Checkout code
-      uses: actions/checkout@v3
+    - name: 📦 Checkout code
+      uses: actions/checkout@v4
 
-    - name: ⚙️ Setup .NET SDK
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x' # Or 7.0.x, etc.
+    - name: 🔧 Install .NET SDK 8.0 locally (no root)
+      run: |
+        mkdir -p "$DOTNET_ROOT"
+        curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
+        chmod +x dotnet-install.sh
+        ./dotnet-install.sh --version 8.0.100 --install-dir "$DOTNET_ROOT"
 
-    - name: 📦 Restore dependencies
+    - name: 📥 Restore dependencies
       run: dotnet restore
 
-    - name: 🏗️ Build the project
+    - name: 🛠️ Build the project
       run: dotnet build --configuration Release
 
-    - name: 🚀 Publish the app
-      run: dotnet publish -c Release -o ./artifact
+    - name: 🚀 Publish the app to ./publish folder
+      run: dotnet publish -c Release -o ./publish
 
-    - name: 📁 List published files
-      run: ls -R ./artifact
+    - name: 📂 List published files
+      run: ls -R ./publish
+
+    - name: 📤 Upload published output as GitHub artifact (optional)
+      uses: actions/upload-artifact@v4
+      with:
+        name: aspnetcore-published
+        path: ./publish
