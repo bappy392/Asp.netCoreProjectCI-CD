@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: m1-tag  # or use 'ubuntu-latest' for GitHub-hosted runner
+    runs-on: ubuntu-latest  # or use 'ubuntu-latest' for GitHub-hosted runner
 
     env:
       DOTNET_ROOT: ${{ runner.temp }}/dotnet
