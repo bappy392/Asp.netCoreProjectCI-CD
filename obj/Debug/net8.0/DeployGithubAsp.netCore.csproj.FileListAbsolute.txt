@@ -32,3 +32,7 @@ D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\obj\Debug\net8.0\r
 D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\obj\Debug\net8.0\DeployGithubAsp.netCore.pdb
 D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\obj\Debug\net8.0\DeployGithubAsp.netCore.genruntimeconfig.cache
 D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\obj\Debug\net8.0\ref\DeployGithubAsp.netCore.dll
+D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\bin\Debug\net8.0\SixLabors.ImageSharp.dll
+D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\obj\Debug\net8.0\DeployGithubAsp.netCore.csproj.AssemblyReference.cache
+D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\obj\Debug\net8.0\DeployGithubAsp.netCore.sourcelink.json
+D:\AspAngular\DeployGithubAsp.netCore\DeployGithubAsp.netCore\obj\Debug\net8.0\DeployGi.472423D7.Up2Date

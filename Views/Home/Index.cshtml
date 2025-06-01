@@ -1,8 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Upload Image";
 }
+<h2>Upload TIFF or IMG Image</h2>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">Deploy Github CI/CD</a>.</p>
-</div>
+<form asp-controller="Home" asp-action="Index" enctype="multipart/form-data" method="post">
+    <div>
+        <input type="file" name="imageFile" />
+    </div>
+    <div>
+        <input type="submit" value="Convert to JPG" />
+    </div>
+</form>
+
+@if (ViewBag.ConvertedImagePath != null)
+{
+    <h3>Converted JPG:</h3>
+    <img src="@Url.Content(ViewBag.ConvertedImagePath)" width="300" />
+}

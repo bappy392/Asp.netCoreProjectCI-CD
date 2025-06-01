@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DeployGithubAsp.netCore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+192171827872daef4a1c2cb7d20c2a19ec2c5d88")]
 [assembly: System.Reflection.AssemblyProductAttribute("DeployGithubAsp.netCore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DeployGithubAsp.netCore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
